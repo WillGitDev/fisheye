@@ -1,6 +1,11 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --primary-color: #901c1c;
+  --primary-color-light: #d3573c;
+  --grey: #525252;
+  --grey-light: #fafafa;
+  --secondary-color: #901c1c;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -16,12 +21,13 @@ html {
 
 html,
 body {
-  max-width: 100vw;
   overflow-x: hidden;
 }
 
 body {
   min-height: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   color: var(--foreground);
