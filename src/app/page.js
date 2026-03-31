@@ -10,7 +10,7 @@ export default async function Page() {
 
   return (
     <div className={styles.container}>
-      <Header />
+      <Header title={true} />
       <div className={styles.containerProfil}>
         {photographers.map((photographer) => (
           <ProfilInfo
