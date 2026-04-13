@@ -1,3 +1,4 @@
+
 import styles from "./page.module.css";
 import Header from "@components/Header";
 import ProfilInfo from "@components/ProfilInfo";

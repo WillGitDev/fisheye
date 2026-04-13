@@ -1,5 +1,6 @@
 import { DM_Sans } from "next/font/google";
 import "./globals.css";
+import { ModalProvider } from "@/context/ModalContext";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -15,7 +16,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="fr" className={dmSans.variable}>
-      <body className={dmSans.className}>{children}</body>
+      <body className={dmSans.className}>
+        <ModalProvider>{children}</ModalProvider>
+      </body>
     </html>
   );
 }

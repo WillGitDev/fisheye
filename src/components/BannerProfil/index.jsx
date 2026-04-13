@@ -1,5 +1,6 @@
 import styles from "./bannerProfil.module.css";
 import Image from "next/image";
+import ContactButton from "@components/ContactButton";
 export default function BannerProfil({
   imgUrl,
   name,
@@ -17,12 +18,7 @@ export default function BannerProfil({
         >{`${city}, ${country}`}</p>
         <p className={styles.tagline}>{tagline}</p>
       </div>
-      <button
-        className={styles.buttonContact}
-        aria-label="Contact me"
-      >
-        Contactez-moi
-      </button>
+      <ContactButton name={name} />
       <Image
         className={styles.img}
         src={`/${imgUrl}`}

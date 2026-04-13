@@ -17,11 +17,14 @@ export default function ListBox() {
       <p id="listbox-label" className={styles.label}>
         Trier par
       </p>
-      <div className={styles.listButtonContainer}>
+      <div
+        className={`${styles.listButtonContainer} ${isOpen && styles.buttonOpen}`}
+      >
         <button
           aria-haspopup="listbox"
           aria-expanded={isOpen}
           aria-labelledby="listbox-label"
+          aria-activedescendant={`option-${selectedIndex}`}
           onClick={() => setIsOpen(!isOpen)}
           className={styles.listBoxButton}
         >
@@ -34,7 +37,7 @@ export default function ListBox() {
         {isOpen && (
           <ul
             role="listbox"
-            aria-label="Trier par"
+            aria-labelledby="listbox-label"
             className={styles.list}
           >
             {options.map(
@@ -43,12 +46,19 @@ export default function ListBox() {
                   <li
                     className={styles.listItem}
                     key={option}
+                    id={`option-${index}`}
                     role="option"
                     aria-selected={index === selectedIndex}
                     tabIndex="0"
                     onClick={() => {
                       setSelectedIndex(index);
                       setIsOpen(false);
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        setSelectedIndex(index);
+                        setIsOpen(false);
+                      }
                     }}
                   >
                     {option}

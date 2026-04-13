@@ -1,14 +1,10 @@
-.choiceList {
-  background-color: var(--primary-color);
-  color: white;
-  width: 170px;
-  min-height: 50px;
-  padding: 10px;
-  font-weight: 500;
-  font-size: 18px;
-  border-top: 2px solid white;
-}
-
-.option {
-  height: 100px;
+.container {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(300px, 1fr)
+  );
+  row-gap: 20px;
+  column-gap: 100px;
+  margin-top: 40px;
 }

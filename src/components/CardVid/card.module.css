@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+}
+
+.video {
+  height: 300px;
+  width: 350px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.contentInfo {
+  color: var(--primary-color);
+  font-weight: 400;
+  font-size: 24px;
+}
+
+.nbrLikes {
+  color: var(--primary-color);
+  font-weight: 500;
+  font-size: 24px;
+}
