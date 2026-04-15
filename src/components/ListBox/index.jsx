@@ -1,40 +1,53 @@
 "use client";
 import styles from "./listbox.module.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faChevronDown,
   faChevronUp,
 } from "@fortawesome/free-solid-svg-icons";
+import { useModal } from "@/context/ModalContext";
 
 export default function ListBox() {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenModalForm, setIsOpenModalForm] =
+    useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const options = ["Popularité", "Date", "Titre"];
+  const { mediaTag, setMediaTag } = useModal();
 
+  const handleOptionClick = (option) => {
+    setMediaTag(option);
+    setIsOpenModalForm(false);
+  };
+
+  useEffect(() => {
+    console.log("Valeur de mediaTag : ", mediaTag);
+  }, [selectedIndex, setMediaTag]);
   return (
     <div className={styles.container}>
       <p id="listbox-label" className={styles.label}>
         Trier par
       </p>
       <div
-        className={`${styles.listButtonContainer} ${isOpen && styles.buttonOpen}`}
+        className={`${styles.listButtonContainer} ${isOpenModalForm && styles.buttonOpen}`}
       >
         <button
           aria-haspopup="listbox"
-          aria-expanded={isOpen}
+          aria-expanded={isOpenModalForm}
           aria-labelledby="listbox-label"
           aria-activedescendant={`option-${selectedIndex}`}
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={() =>
+            setIsOpenModalForm(!isOpenModalForm)
+          }
           className={styles.listBoxButton}
         >
           {options[selectedIndex]}
           <FontAwesomeIcon
             icon={faChevronDown}
-            className={`${styles.chevron} ${isOpen && styles.chevronOpen}`}
+            className={`${styles.chevron} ${isOpenModalForm && styles.chevronOpen}`}
           />
         </button>
-        {isOpen && (
+        {isOpenModalForm && (
           <ul
             role="listbox"
             aria-labelledby="listbox-label"
@@ -51,13 +64,14 @@ export default function ListBox() {
                     aria-selected={index === selectedIndex}
                     tabIndex="0"
                     onClick={() => {
+                      handleOptionClick(option);
                       setSelectedIndex(index);
-                      setIsOpen(false);
+                      // setIsOpenModalForm(false);
                     }}
                     onKeyDown={(e) => {
                       if (e.key === "Enter") {
                         setSelectedIndex(index);
-                        setIsOpen(false);
+                        setIsOpenModalForm(false);
                       }
                     }}
                   >

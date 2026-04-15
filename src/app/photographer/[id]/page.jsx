@@ -19,7 +19,7 @@ export default async function Page({ params }) {
       },
     },
   );
-  console.log(photographer.medias);
+  console.log("La photo : ", photographer.portrait);
   return (
     <ClientWrapper photographer={photographer}>
       <div className={styles.container}>

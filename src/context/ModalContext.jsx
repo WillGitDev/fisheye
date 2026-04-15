@@ -10,20 +10,34 @@ import "@/app/globals.css";
 const ModalContext = createContext();
 
 export function ModalProvider({ children }) {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenModalForm, setIsOpenModalForm] =
+    useState(false);
+  const [isOpenModalCarroussel, setIsOpenModalCarroussel] =
+    useState(false);
+  const [
+    selectedCarrousselItem,
+    setSelectedCarrousselItem,
+  ] = useState(null);
+  const [mediaTag, setMediaTag] = useState(null);
   const value = {
-    isOpen,
-    setIsOpen,
+    isOpenModalForm,
+    setIsOpenModalForm,
+    isOpenModalCarroussel,
+    setIsOpenModalCarroussel,
+    selectedCarrousselItem,
+    setSelectedCarrousselItem,
+    mediaTag,
+    setMediaTag,
   };
   useEffect(() => {
-    if (isOpen) {
+    if (isOpenModalForm) {
       document.documentElement.classList.add("noScroll");
     } else {
       document.documentElement.classList.remove("noScroll");
     }
     return () =>
       document.documentElement.classList.remove("noScroll");
-  }, [isOpen]);
+  }, [isOpenModalForm]);
   return (
     <ModalContext.Provider value={value}>
       {children}

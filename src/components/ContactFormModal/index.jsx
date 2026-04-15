@@ -1,80 +1,15 @@
+import styles from "./contactFormModal.module.css";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "./contactFormModal.module.css";
-import { useRef, useEffect } from "react";
+import Modal from "@components/Modal";
+
 export default function ContactFormModal({
   name,
   isOpen,
   onClose,
 }) {
-  const modalRef = useRef(null);
-  const lastActiveElement = useRef(null);
-
-  useEffect(() => {
-    if (isOpen) {
-      lastActiveElement.current = document.activeElement;
-      const focusableSelectors = [
-        "button",
-        "input",
-        "textarea",
-      ];
-      const focusableElements = modalRef.current
-        ? modalRef.current.querySelectorAll(
-            focusableSelectors.join(","),
-          )
-        : [];
-      let firstElement = focusableElements[0];
-      const closeButton = modalRef.current?.querySelector(
-        `.${styles.closeButton}`,
-      );
-      if (closeButton) {
-        firstElement = closeButton;
-      }
-      const lastElement =
-        focusableElements[focusableElements.length - 1];
-      firstElement && firstElement.focus();
-
-      function handleTab(event) {
-        if (event.key === "Escape" && isOpen) {
-          event.preventDefault();
-          onClose();
-          return;
-        }
-
-        if (event.key !== "Tab") return;
-
-        if (focusableElements.length === 0) return;
-
-        if (event.shiftKey) {
-          if (document.activeElement === firstElement) {
-            event.preventDefault();
-            lastElement.focus();
-          }
-        } else {
-          if (document.activeElement === lastElement) {
-            event.preventDefault();
-            firstElement.focus();
-          }
-        }
-      }
-      document.addEventListener("keydown", handleTab);
-      console.log(focusableElements);
-    } else {
-      if (lastActiveElement.current) {
-        lastActiveElement.current.focus();
-      }
-    }
-  }, [isOpen]);
-
   return (
-    <div
-      ref={modalRef}
-      className={`${styles.container} ${isOpen ? styles.openModal : styles.closeModal}`}
-      aria-hidden={!isOpen}
-      role="dialog"
-      aria-describedby="modalContact"
-      aria-labelledby="modal title"
-    >
+    <Modal isOpen={isOpen} onClose={onClose}>
       <div className={styles.containerForm}>
         <div className={styles.header}>
           <h1 className={styles.title} id="modal title">
@@ -159,6 +94,6 @@ export default function ContactFormModal({
           </button>
         </form>
       </div>
-    </div>
+    </Modal>
   );
 }

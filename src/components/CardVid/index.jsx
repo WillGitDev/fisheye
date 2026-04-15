@@ -2,10 +2,20 @@ import styles from "./card.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 
-export default function CardVid({ srcVid, title, like }) {
+export default function CardVid({
+  srcVid,
+  title,
+  like,
+  onClick,
+  id,
+}) {
   return (
     <div className={styles.container}>
-      <div className={styles.imgContainer}>
+      <div
+        className={styles.imgContainer}
+        onClick={onClick}
+        style={{ cursor: "pointer" }}
+      >
         <video className={styles.video} src={`/${srcVid}`}>
           Le navigateur ne peut pas afficher de vidéo.
         </video>

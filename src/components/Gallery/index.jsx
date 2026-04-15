@@ -1,32 +1,52 @@
 "use client";
 import styles from "./gallery.module.css";
-import CardImg from "@/components/CardImg";
-import CardVid from "@/components/CardVid";
+import CardMedia from "@/components/CardMedia";
+import { useModal } from "@/context/ModalContext";
+import { useMemo } from "react";
 
 export default function Gallery({ works }) {
-  const pictures = works.filter(
-    (work) => work.image !== null,
-  );
-  const videos = works.filter(
-    (work) => work.video !== null,
-  );
-  console.log("L'objet works contient :", videos);
+  const {
+    setIsOpenModalCarroussel,
+    setSelectedCarrousselItem,
+    mediaTag,
+  } = useModal();
+
+  const sortedMedias = useMemo(() => {
+    const result = [...works].sort((a, b) => {
+      if (mediaTag === "Titre")
+        return a.title.localeCompare(b.title);
+      if (mediaTag === "Popularité")
+        return b.likes - a.likes;
+      if (mediaTag === "Date")
+        return new Date(b.date) - new Date(a.date);
+      return 0;
+    });
+    console.log(
+      "Le fichier trié par ",
+      mediaTag,
+      ": ",
+      result,
+    );
+    return result;
+  }, [works, mediaTag]);
+
   return (
     <div className={styles.container}>
-      {pictures.map((picture) => (
-        <CardImg
-          key={picture.id}
-          srcImg={picture.image}
-          title={picture.title}
-          like={picture.likes}
-        />
-      ))}
-      {videos.map((video) => (
-        <CardVid
-          key={video.id}
-          srcVid={video.video}
-          title={video.title}
-          like={video.likes}
+      {sortedMedias.map((media, index) => (
+        <CardMedia
+          key={media.id}
+          srcMedia={media.image ? media.image : media.video}
+          title={media.title}
+          initialLike={media.likes}
+          id={media.id}
+          image={media.image}
+          onClick={() => {
+            setSelectedCarrousselItem({
+              items: sortedMedias,
+              currentIndex: index,
+            });
+            setIsOpenModalCarroussel(true);
+          }}
         />
       ))}
     </div>
