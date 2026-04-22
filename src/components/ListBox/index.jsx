@@ -6,14 +6,14 @@ import {
   faChevronDown,
   faChevronUp,
 } from "@fortawesome/free-solid-svg-icons";
-import { useModal } from "@/context/ModalContext";
+import { useTag } from "@/context/TagContext";
 
 export default function ListBox() {
   const [isOpenModalForm, setIsOpenModalForm] =
     useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const options = ["Popularité", "Date", "Titre"];
-  const { mediaTag, setMediaTag } = useModal();
+  const { mediaTag, setMediaTag } = useTag();
 
   const handleOptionClick = (option) => {
     setMediaTag(option);

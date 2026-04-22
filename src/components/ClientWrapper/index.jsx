@@ -9,6 +9,8 @@ export default function ClientWrapper({
   photographer,
   children,
 }) {
+  const name = photographer.name;
+
   const {
     isOpenModalForm,
     setIsOpenModalForm,
@@ -23,6 +25,7 @@ export default function ClientWrapper({
       <ContactFormModal
         isOpen={isOpenModalForm}
         onClose={() => setIsOpenModalForm(false)}
+        name={name}
       />
       <ModalGallery
         isOpen={isOpenModalCarroussel}

@@ -42,11 +42,13 @@ export default function CardMedia({
             height={300}
             alt={title}
             className={styles.img}
+            tabIndex={0}
           />
         ) : (
           <video
             className={styles.video}
             src={`/${srcMedia}`}
+            tabIndex={0}
           >
             Le navigateur ne peut pas afficher de vidéo.
           </video>
@@ -58,12 +60,18 @@ export default function CardMedia({
           <p
             className={styles.nbrLikes}
             onClick={handleAddLike}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleAddLike(e);
+              }
+            }}
           >
             {like}
             <FontAwesomeIcon
               icon={faHeartSolid}
               className={styles.heart}
               aria-label="likes"
+              tabIndex={0}
             />
           </p>
         </div>

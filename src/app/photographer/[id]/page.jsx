@@ -5,6 +5,7 @@ import BannerProfil from "@components/BannerProfil";
 import Gallery from "@components/Gallery";
 import ListBox from "@components/ListBox";
 import ClientWrapper from "@components/ClientWrapper";
+import SumLikes from "@components/SumLikes";
 
 export default async function Page({ params }) {
   const { id } = await params;
@@ -19,7 +20,13 @@ export default async function Page({ params }) {
       },
     },
   );
-  console.log("La photo : ", photographer.portrait);
+  let sumLike = 0;
+  const priceHour = photographer.price;
+  photographer.medias.forEach((element) => {
+    sumLike += element.likes;
+  });
+  console.log("La somme de like est : ", sumLike);
+  console.log("photographer contient : ", photographer);
   return (
     <ClientWrapper photographer={photographer}>
       <div className={styles.container}>
@@ -34,6 +41,12 @@ export default async function Page({ params }) {
         />
         <ListBox />
         <Gallery works={photographer.medias} />
+        <div className={styles.containerSumLike}>
+          <SumLikes
+            sumLike={sumLike}
+            priceHour={priceHour}
+          />
+        </div>
       </div>
     </ClientWrapper>
   );

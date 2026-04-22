@@ -1,3 +1,4 @@
+"use client";
 import styles from "./modal.module.css";
 import Modal from "@components/Modal";
 import Image from "next/image";
@@ -40,6 +41,7 @@ export default function ModalGallery({
       }
     });
   };
+
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className={styles.container}>
@@ -49,6 +51,7 @@ export default function ModalGallery({
           title="Fermer"
           onClick={onClose}
           aria-label="Close Contact form"
+          tabIndex={1}
         >
           <FontAwesomeIcon
             className={styles.icon}

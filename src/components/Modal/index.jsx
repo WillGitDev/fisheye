@@ -24,7 +24,7 @@ export default function Modal({
         : [];
       let firstElement = focusableElements[0];
       const closeButton = modalRef.current?.querySelector(
-        `.${styles.closeButton}`,
+        '[title="Fermer"]',
       );
       if (closeButton) {
         firstElement = closeButton;

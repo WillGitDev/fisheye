@@ -2,14 +2,16 @@
 import styles from "./gallery.module.css";
 import CardMedia from "@/components/CardMedia";
 import { useModal } from "@/context/ModalContext";
+import { useTag } from "@/context/TagContext";
+
 import { useMemo } from "react";
 
 export default function Gallery({ works }) {
   const {
     setIsOpenModalCarroussel,
     setSelectedCarrousselItem,
-    mediaTag,
   } = useModal();
+  const { mediaTag } = useTag();
 
   const sortedMedias = useMemo(() => {
     const result = [...works].sort((a, b) => {

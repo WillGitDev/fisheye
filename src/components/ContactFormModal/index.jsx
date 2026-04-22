@@ -8,11 +8,33 @@ export default function ContactFormModal({
   isOpen,
   onClose,
 }) {
+  const handlePrintInfo = (e) => {
+    e.preventDefault();
+    const form = e.currentTarget.closest("form");
+    const data = new FormData(form);
+    console.log(
+      "Le nom de l'utilisateur : ",
+      data.get("name"),
+    );
+    console.log(
+      "Le prénom de l'utilisateur : ",
+      data.get("surname"),
+    );
+    console.log(
+      "L'adresse mail de l'utilisateur est : ",
+      data.get("email"),
+    );
+    console.log(
+      "Le message utilisateur : ",
+      data.get("message"),
+    );
+    form.reset();
+  };
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <div className={styles.containerForm}>
         <div className={styles.header}>
-          <h1 className={styles.title} id="modal title">
+          <h1 className={styles.title} id="modalTitle">
             Contactez-moi {name}
           </h1>
           <button
@@ -29,11 +51,7 @@ export default function ContactFormModal({
           </button>
         </div>
         <form className={styles.form}>
-          <label
-            className={styles.label}
-            htmlFor="surname"
-            id="Firts name"
-          >
+          <label className={styles.label} htmlFor="surname">
             Prénom
           </label>
           <input
@@ -43,11 +61,7 @@ export default function ContactFormModal({
             name="surname"
             aria-labelledby="First name"
           />
-          <label
-            className={styles.label}
-            htmlFor="name"
-            id="Last name"
-          >
+          <label className={styles.label} htmlFor="name">
             Nom
           </label>
           <input
@@ -55,13 +69,9 @@ export default function ContactFormModal({
             type="text"
             id="name"
             name="name"
-            aria-labelledby="Last name"
+            aria-labelledby="lastName"
           />
-          <label
-            className={styles.label}
-            htmlFor="email"
-            id="Email"
-          >
+          <label className={styles.label} htmlFor="email">
             Email
           </label>
           <input
@@ -69,26 +79,23 @@ export default function ContactFormModal({
             type="email"
             id="email"
             name="email"
-            aria-labelledby="Email"
+            aria-labelledby="email"
           />
-          <label
-            className={styles.label}
-            htmlFor="message"
-            id="Your message"
-          >
+          <label className={styles.label} htmlFor="message">
             Votre message
           </label>
           <textarea
             className={styles.textarea}
             id="message"
             name="message"
-            aria-labelledby="Your message"
+            aria-labelledby="yourMessage"
           ></textarea>
 
           <button
             className={styles.button}
             type="submit"
             aria-label="Send"
+            onClick={handlePrintInfo}
           >
             Envoyer
           </button>

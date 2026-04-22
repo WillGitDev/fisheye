@@ -4,7 +4,9 @@
   width: 350px;
 }
 
-.imgContainer {
+.containerLike {
+  min-width: 70px;
+  margin-left: 5px;
 }
 
 .img {
@@ -27,6 +29,10 @@
   color: var(--primary-color);
   font-weight: 500;
   font-size: 24px;
+}
+
+.heart {
+  margin-left: 5px;
 }
 
 /* video */
