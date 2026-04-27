@@ -11,15 +11,18 @@ export default function CardMedia({
   initialLike,
   onClick,
   id,
-  image, //booléen pour savoir si on affiche une image ou une vidéo.
+  image, // booléen pour savoir si on affiche une image ou une vidéo.
 }) {
   const [isLiked, setIsLiked] = useState(false);
   const [like, setLike] = useState(initialLike);
+
   const handleAddLike = async (e) => {
     e.stopPropagation();
     if (isLiked) return;
+
     setIsLiked(true);
     setLike((prev) => prev + 1);
+
     try {
       await incrementLikeAction(id);
     } catch (error) {
@@ -28,12 +31,14 @@ export default function CardMedia({
       setIsLiked(false);
     }
   };
+
   return (
     <div className={styles.container}>
-      <div
+      <button
+        type="button"
         className={styles.imgContainer}
         onClick={onClick}
-        style={{ cursor: "pointer" }}
+        aria-label={title}
       >
         {image ? (
           <Image
@@ -42,18 +47,16 @@ export default function CardMedia({
             height={300}
             alt={title}
             className={styles.img}
-            tabIndex={0}
           />
         ) : (
           <video
             className={styles.video}
             src={`/${srcMedia}`}
-            tabIndex={0}
           >
             Le navigateur ne peut pas afficher de vidéo.
           </video>
         )}
-      </div>
+      </button>
       <div className={styles.content}>
         <p className={styles.contentInfo}>{title}</p>
         <div className={styles.containerLike}>

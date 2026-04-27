@@ -4,6 +4,13 @@
   width: 350px;
 }
 
+.imgContainer {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
 .containerLike {
   min-width: 70px;
   margin-left: 5px;

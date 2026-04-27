@@ -70,6 +70,7 @@ export default function ListBox() {
                     }}
                     onKeyDown={(e) => {
                       if (e.key === "Enter") {
+                        handleOptionClick(option);
                         setSelectedIndex(index);
                         setIsOpenModalForm(false);
                       }
