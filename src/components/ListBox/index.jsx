@@ -60,7 +60,6 @@ export default function ListBox() {
     setIsOpenModalForm(false);
   };
 
-  useEffect(() => {}, [selectedIndex, setMediaTag]);
   return (
     <div className={styles.container}>
       <p id="listbox-label" className={styles.label}>

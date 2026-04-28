@@ -73,7 +73,7 @@ export default function Modal({
       aria-hidden={!isOpen}
       role="dialog"
       aria-describedby="modalContact"
-      aria-labelledby="modal title"
+      aria-labelledby="modalTitle"
     >
       {children}
     </div>

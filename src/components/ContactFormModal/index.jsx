@@ -51,7 +51,11 @@ export default function ContactFormModal({
           </button>
         </div>
         <form className={styles.form}>
-          <label className={styles.label} htmlFor="surname">
+          <label
+            className={styles.label}
+            htmlFor="surname"
+            id="firstName"
+          >
             Prénom
           </label>
           <input
@@ -59,9 +63,13 @@ export default function ContactFormModal({
             type="text"
             id="surname"
             name="surname"
-            aria-labelledby="First name"
+            aria-labelledby="firstName"
           />
-          <label className={styles.label} htmlFor="name">
+          <label
+            className={styles.label}
+            htmlFor="name"
+            id="lastName"
+          >
             Nom
           </label>
           <input
@@ -71,7 +79,11 @@ export default function ContactFormModal({
             name="name"
             aria-labelledby="lastName"
           />
-          <label className={styles.label} htmlFor="email">
+          <label
+            className={styles.label}
+            htmlFor="email"
+            id="emailLabel"
+          >
             Email
           </label>
           <input
@@ -79,9 +91,13 @@ export default function ContactFormModal({
             type="email"
             id="email"
             name="email"
-            aria-labelledby="email"
+            aria-labelledby="emailLabel"
           />
-          <label className={styles.label} htmlFor="message">
+          <label
+            className={styles.label}
+            htmlFor="message"
+            id="yourMessage"
+          >
             Votre message
           </label>
           <textarea
