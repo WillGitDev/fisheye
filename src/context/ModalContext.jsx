@@ -18,7 +18,7 @@ export function ModalProvider({ children }) {
     selectedCarrousselItem,
     setSelectedCarrousselItem,
   ] = useState(null);
-  const [mediaTag, setMediaTag] = useState(null);
+  // const [mediaTag, setMediaTag] = useState(null);
   const value = {
     isOpenModalForm,
     setIsOpenModalForm,
@@ -26,8 +26,8 @@ export function ModalProvider({ children }) {
     setIsOpenModalCarroussel,
     selectedCarrousselItem,
     setSelectedCarrousselItem,
-    mediaTag,
-    setMediaTag,
+    // mediaTag,
+    // setMediaTag,
   };
   useEffect(() => {
     if (isOpenModalForm) {

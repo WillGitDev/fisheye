@@ -45,7 +45,16 @@ export default function ListBox() {
         break;
     }
   };
-  ///////////////////////////
+  useEffect(() => {
+    if (isOpenModalForm) {
+      document.documentElement.classList.add("noScroll");
+    } else {
+      document.documentElement.classList.remove("noScroll");
+    }
+    return () =>
+      document.documentElement.classList.remove("noScroll");
+  }, [isOpenModalForm]);
+
   const handleOptionClick = (option) => {
     setMediaTag(option);
     setIsOpenModalForm(false);
