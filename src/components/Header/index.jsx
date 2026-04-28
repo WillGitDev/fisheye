@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Header({ title = false }) {
   return (
-    <div className={styles.container}>
+    <header className={styles.container}>
       <Link href="/">
         <Image
           src="/logo/logo.png"
@@ -16,6 +16,6 @@ export default function Header({ title = false }) {
       {title && (
         <h1 className={styles.title}>Nos photographes</h1>
       )}
-    </div>
+    </header>
   );
 }

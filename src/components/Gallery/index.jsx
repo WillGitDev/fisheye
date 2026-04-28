@@ -23,12 +23,7 @@ export default function Gallery({ works }) {
         return new Date(b.date) - new Date(a.date);
       return 0;
     });
-    console.log(
-      "Le fichier trié par ",
-      mediaTag,
-      ": ",
-      result,
-    );
+
     return result;
   }, [works, mediaTag]);
 

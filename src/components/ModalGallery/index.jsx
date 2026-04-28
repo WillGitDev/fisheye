@@ -5,6 +5,7 @@ import Image from "next/image";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useEffect } from "react";
+import useArrowNavigation from "@/utils/useArrowNavigation";
 
 export default function ModalGallery({
   isOpen,
@@ -18,11 +19,9 @@ export default function ModalGallery({
       setIndex(item.currentIndex);
     }
   }, [item]);
-  if (!item) return null;
-
-  const currentMedia = item.items[index];
 
   const nextMedia = () => {
+    if (!isOpen) return;
     setIndex((prevIndex) => {
       if (prevIndex === item.items.length - 1) {
         return 0;
@@ -33,6 +32,7 @@ export default function ModalGallery({
   };
 
   const prevMedia = () => {
+    if (!isOpen) return;
     setIndex((prevIndex) => {
       if (prevIndex === 0) {
         return item.items.length - 1;
@@ -41,6 +41,13 @@ export default function ModalGallery({
       }
     });
   };
+  useArrowNavigation({
+    onLeft: prevMedia,
+    onRight: nextMedia,
+  });
+  if (!item) return null;
+
+  const currentMedia = item.items[index];
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>

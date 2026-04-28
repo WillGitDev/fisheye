@@ -33,7 +33,7 @@ export default function Modal({
         focusableElements[focusableElements.length - 1];
       firstElement && firstElement.focus();
 
-      function handleTab(event) {
+      function handleNavigation(event) {
         if (event.key === "Escape" && isOpen) {
           event.preventDefault();
           onClose();
@@ -56,8 +56,10 @@ export default function Modal({
           }
         }
       }
-      document.addEventListener("keydown", handleTab);
-      console.log(focusableElements);
+      document.addEventListener(
+        "keydown",
+        handleNavigation,
+      );
     } else {
       if (lastActiveElement.current) {
         lastActiveElement.current.focus();

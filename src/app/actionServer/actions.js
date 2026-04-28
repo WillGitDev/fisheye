@@ -11,3 +11,24 @@ export async function incrementLikeAction(id) {
   });
   revalidatePath("/photographer/[id]", "page");
 }
+
+export async function findAllPhotographers() {
+  const photographers =
+    await prisma.photographer.findMany();
+  return photographers;
+}
+
+export async function findPhotographer(id) {
+  const photographer = await prisma.photographer.findUnique(
+    {
+      where: {
+        id: parseInt(id),
+      },
+      //on inclut la relation
+      include: {
+        medias: true,
+      },
+    },
+  );
+  return photographer;
+}

@@ -1,14 +1,22 @@
-
+"use client";
 import styles from "./page.module.css";
 import Header from "@components/Header";
 import ProfilInfo from "@components/ProfilInfo";
-import { prisma } from "../../lib/prisma";
+import { findAllPhotographers } from "@/app/actionServer/actions";
+import { useEffect, useState } from "react";
 
-export default async function Page() {
-  const photographers =
-    await prisma.photographer.findMany();
-  console.log(photographers);
-
+export default function Page() {
+  const [photographers, setPhotographers] = useState([]);
+  useEffect(() => {
+    async function fetchData() {
+      const data = await findAllPhotographers();
+      setPhotographers(data);
+    }
+    fetchData();
+  }, []);
+  if (!photographers) {
+    return <div>Chargement de la page ...</div>;
+  }
   return (
     <div className={styles.container}>
       <Header title={true} />

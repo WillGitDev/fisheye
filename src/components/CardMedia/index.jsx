@@ -33,7 +33,7 @@ export default function CardMedia({
   };
 
   return (
-    <div className={styles.container}>
+    <article className={styles.container}>
       <button
         type="button"
         className={styles.imgContainer}
@@ -47,6 +47,7 @@ export default function CardMedia({
             height={300}
             alt={title}
             className={styles.img}
+            priority
           />
         ) : (
           <video
@@ -79,6 +80,6 @@ export default function CardMedia({
           </p>
         </div>
       </div>
-    </div>
+    </article>
   );
 }

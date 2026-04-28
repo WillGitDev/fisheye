@@ -15,14 +15,43 @@ export default function ListBox() {
   const options = ["Popularité", "Date", "Titre"];
   const { mediaTag, setMediaTag } = useTag();
 
+  const handleKeyDown = (e) => {
+    if (!isOpenModalForm) {
+      if (e.key === "ArrowDown" || e.key === "Enter") {
+        e.preventDefault();
+        setIsOpenModalForm(true);
+      }
+      return;
+    }
+
+    switch (e.key) {
+      case "ArrowDown":
+        setSelectedIndex((prev) =>
+          prev < options.length - 1 ? prev + 1 : 0,
+        );
+        break;
+      case "ArrowUp":
+        setSelectedIndex((prev) =>
+          prev > 0 ? prev - 1 : options.length - 1,
+        );
+        break;
+      case "Enter":
+        e.preventDefault();
+        handleOptionClick(options[selectedIndex]);
+        setIsOpenModalForm(false);
+        break;
+      case "Escape":
+        setIsOpenModalForm(false);
+        break;
+    }
+  };
+  ///////////////////////////
   const handleOptionClick = (option) => {
     setMediaTag(option);
     setIsOpenModalForm(false);
   };
 
-  useEffect(() => {
-    console.log("Valeur de mediaTag : ", mediaTag);
-  }, [selectedIndex, setMediaTag]);
+  useEffect(() => {}, [selectedIndex, setMediaTag]);
   return (
     <div className={styles.container}>
       <p id="listbox-label" className={styles.label}>
@@ -36,6 +65,7 @@ export default function ListBox() {
           aria-expanded={isOpenModalForm}
           aria-labelledby="listbox-label"
           aria-activedescendant={`option-${selectedIndex}`}
+          onKeyDown={handleKeyDown}
           onClick={() =>
             setIsOpenModalForm(!isOpenModalForm)
           }
@@ -62,7 +92,6 @@ export default function ListBox() {
                     id={`option-${index}`}
                     role="option"
                     aria-selected={index === selectedIndex}
-                    tabIndex="0"
                     onClick={() => {
                       handleOptionClick(option);
                       setSelectedIndex(index);
